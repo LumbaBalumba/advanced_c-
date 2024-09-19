@@ -1,7 +1,7 @@
 #include "hello.hpp"
 
 auto
-main(int argc, char *argv[]) -> int
+main() -> int
 {
     Hello hello("user");
     hello.say();
