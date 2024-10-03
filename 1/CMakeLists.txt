@@ -9,6 +9,6 @@ add_executable(hello ${SOURCES})
 target_include_directories(hello PRIVATE include)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_options(hello PRIVATE -Wall -Wextra -Werror -m64 -fsanitize=leak,undefined,address)
+    target_compile_options(hello PRIVATE -Wall -Wextra -Werror -fsanitize=leak,undefined,address)
     target_link_options(hello PRIVATE -fsanitize=leak,undefined,address)
 endif()
