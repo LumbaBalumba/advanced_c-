@@ -1,0 +1,1 @@
+. "/home/i3alumba/Projects/advanced_c++/2/build/Release/generators/conanbuildenv-release-x86_64.sh"

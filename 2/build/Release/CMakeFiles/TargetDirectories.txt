@@ -1,0 +1,7 @@
+/home/i3alumba/Projects/advanced_c++/2/build/Release/CMakeFiles/proj.dir
+/home/i3alumba/Projects/advanced_c++/2/build/Release/CMakeFiles/edit_cache.dir
+/home/i3alumba/Projects/advanced_c++/2/build/Release/CMakeFiles/rebuild_cache.dir
+/home/i3alumba/Projects/advanced_c++/2/build/Release/CMakeFiles/list_install_components.dir
+/home/i3alumba/Projects/advanced_c++/2/build/Release/CMakeFiles/install.dir
+/home/i3alumba/Projects/advanced_c++/2/build/Release/CMakeFiles/install/local.dir
+/home/i3alumba/Projects/advanced_c++/2/build/Release/CMakeFiles/install/strip.dir
