@@ -1,30 +1,48 @@
 //unbuffered channel, SPSC
 
+#include <algorithm>
+#include <barrier>
 #include <chrono>
 #include <cstdint>
+#include <functional>
 #include <print>
 #include <random>
 #include <stop_token>
 #include <thread>
+#include <utility>
 
 template<typename T>
 class SPSC
 {
+    T inbound_{};
+    T outbound_{};
+    std::barrier<std::function<void()>> b_;
 
 public:
+    SPSC() : b_(2, [this]() {
+                 outbound_ = std::move(inbound_);
+             }) {}
+
     void
     put(const T &val)
-    {}
+    {
+        inbound_ = val;
+        b_.arrive_and_wait();
+    }
 
 
     void
     put(T &&val)
-    {}
+    {
+        inbound_ = std::move(val);
+        b_.arrive_and_wait();
+    }
 
     T
     get()
     {
-        return T();
+        b_.arrive_and_wait();
+        return std::move(outbound_);
     }
 };
 
@@ -52,7 +70,7 @@ consumer(std::stop_token t, uint32_t seed, SPSC<int> &q)
         std::this_thread::sleep_for(interval);
         auto val = q.get();
         auto cur = std::chrono::system_clock::now().time_since_epoch().count();
-        std::println("producer {} {}", val, cur);
+        std::println("consumer {} {}", val, cur);
     }
 }
 
@@ -63,7 +81,7 @@ main()
     uint32_t seed = uint32_t(std::chrono::system_clock::now().time_since_epoch().count());
     SPSC<int> queue;
     std::jthread t1(producer, seed, std::ref(queue));
-    std::jthread t2(producer, seed, std::ref(queue));
+    std::jthread t2(consumer, seed, std::ref(queue));
     using namespace std::literals;
     std::this_thread::sleep_for(10s);
 }
