@@ -9,11 +9,12 @@ add_executable(3 src/3.cpp)
 
 find_package(Boost-1.86.0 COMPONENTS coro2)
 
-set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
-set(Boost_USE_STATIC_RUNTIME OFF)
+set(Boost_NO_BOOST_CMAKE ON)
 find_package(Boost COMPONENTS coro2)
 
+find_package(Boost COMPONENTS fiber system filesystem REQUIRED)
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
     target_link_libraries(1 ${Boost_LIBRARIES})
