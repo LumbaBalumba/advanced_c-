@@ -1,5 +1,4 @@
 #include <print>
-#include <ratio>
 #include <type_traits>
 #include <variant>
 #include <vector>
